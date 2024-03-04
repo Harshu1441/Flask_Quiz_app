@@ -1,0 +1,128 @@
+[
+    {
+        "question": "In which movie does Will Smith play a character named Agent J?",
+        "options": ["Men in Black", "Independence Day", "I, Robot", "Hancock"],
+        "answer": "Men in Black",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/6/65/Men_in_Black_Poster.jpg/220px-Men_in_Black_Poster.jpg"
+    },
+    {
+        "question": "Who directed the movie 'Inception'?",
+        "options": ["Christopher Nolan", "Steven Spielberg", "Quentin Tarantino", "Martin Scorsese"],
+        "answer": "Christopher Nolan",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/7/7f/Inception_ver3.jpg"
+    },
+    {
+        "question": "Which movie features a character named Jack Dawson and Rose DeWitt Bukater?",
+        "options": ["Titanic", "The Notebook", "Pride and Prejudice", "The Great Gatsby"],
+        "answer": "Titanic",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/2/22/Titanic_poster.jpg"
+    },
+    {
+        "question": "Who played the role of Neo in 'The Matrix'?",
+        "options": ["Keanu Reeves", "Tom Cruise", "Brad Pitt", "Leonardo DiCaprio"],
+        "answer": "Keanu Reeves",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Matrix_Poster.jpg/220px-The_Matrix_Poster.jpg"
+    },
+    {
+        "question": "Which movie is based on a novel by Stephen King about a prison guard?",
+        "options": ["The Green Mile", "Shawshank Redemption", "Misery", "Carrie"],
+        "answer": "The Green Mile",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/c/ce/The_Green_Mile_%28movie_poster%29.jpg/220px-The_Green_Mile_%28movie_poster%29.jpg"
+    },
+    {
+        "question": "Who directed the movie 'The Shawshank Redemption'?",
+        "options": ["Frank Darabont", "Steven Spielberg", "Martin Scorsese", "Quentin Tarantino"],
+        "answer": "Frank Darabont",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg"
+    },
+    {
+        "question": "What is the name of the superhero team in the movie 'The Avengers'?",
+        "options": ["The Avengers", "Justice League", "X-Men", "Fantastic Four"],
+        "answer": "The Avengers",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/f/f9/TheAvengers2012Poster.jpg"
+    },
+    {
+        "question": "Who directed the movie 'Jurassic Park'?",
+        "options": ["Steven Spielberg", "James Cameron", "George Lucas", "Christopher Nolan"],
+        "answer": "Steven Spielberg",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3c/Jurassic_Park_logo.svg/220px-Jurassic_Park_logo.svg.png"
+    },
+    {
+        "question": "Which movie features a character named Maximus Decimus Meridius?",
+        "options": ["Gladiator", "300", "Troy", "Braveheart"],
+        "answer": "Gladiator",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/8/8d/Gladiator_ver1.jpg/220px-Gladiator_ver1.jpg"
+    },
+    {
+        "question": "Who played the role of the Joker in the movie 'The Dark Knight'?",
+        "options": ["Heath Ledger", "Jack Nicholson", "Joaquin Phoenix", "Jared Leto"],
+        "answer": "Heath Ledger",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/8/8a/Dark_Knight.jpg/220px-Dark_Knight.jpg"
+    },
+    {
+        "question": "What is the highest-grossing film of all time (not adjusted for inflation)?",
+        "options": ["Avengers: Endgame", "Avatar", "Titanic", "Star Wars: The Force Awakens"],
+        "answer": "Avengers: Endgame",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg"
+    },
+    {
+        "question": "Who directed the movie 'Avatar'?",
+        "options": ["James Cameron", "Christopher Nolan", "Steven Spielberg", "Peter Jackson"],
+        "answer": "James Cameron",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b0/Avatar-Teaser-Poster.jpg/220px-Avatar-Teaser-Poster.jpg"
+    },
+    {
+        "question": "Which movie is about a clownfish named Marlin searching for his son Nemo?",
+        "options": ["Finding Nemo", "Toy Story", "Up", "Cars"],
+        "answer": "Finding Nemo",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/2/29/Finding_Nemo.jpg"
+    },
+    {
+        "question": "Who played the role of Tony Stark in the Marvel Cinematic Universe?",
+        "options": ["Robert Downey Jr.", "Chris Evans", "Chris Hemsworth", "Mark Ruffalo"],
+        "answer": "Robert Downey Jr.",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/0/00/Iron_Man_poster.jpg"
+    },
+    {
+        "question": "Which movie won the Academy Award for Best Picture in 2019?",
+        "options": ["Joker", "1917", "Parasite", "Once Upon a Time in Hollywood"],
+        "answer": "Parasite",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/5/53/Parasite_%282019_film%29.png"
+    },
+    {
+        "question": "Which movie features a computer program called 'The Grid'?",
+        "options": ["Blade Runner", "Tron", "The Matrix", "Minority Report"],
+        "answer": "Tron",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/1/17/Tron_movie_poster.jpg"
+    },
+    {
+        "question": "Who directed the movie 'The Godfather'?",
+        "options": ["Francis Ford Coppola", "Martin Scorsese", "Steven Spielberg", "Quentin Tarantino"],
+        "answer": "Francis Ford Coppola",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/1/1c/Godfather_ver1.jpg"
+    },
+    {
+        "question": "Which movie is based on a novel by J.R.R. Tolkien?",
+        "options": ["The Lord of the Rings: The Fellowship of the Ring", "Harry Potter and the Philosopher's Stone", "The Chronicles of Narnia: The Lion, the Witch and the Wardrobe", "Eragon"],
+        "answer": "The Lord of the Rings: The Fellowship of the Ring",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/0/0c/The_Lord_of_the_Rings_The_Fellowship_of_the_Ring_poster.jpg"
+    },
+    {
+        "question": "Which movie features a character named James Bond?",
+        "options": ["Casino Royale", "Mission: Impossible", "Jason Bourne", "Kingsman: The Secret Service"],
+        "answer": "Casino Royale",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/1/15/Casino_Royale_2_-_UK_cinema_poster.jpg/220px-Casino_Royale_2_-_UK_cinema_poster.jpg"
+    },
+    {
+        "question": "Which movie is this famous quote from: 'May the Force be with you'?",
+        "options": ["Star Trek", "Star Wars", "Alien", "The Matrix"],
+        "answer": "Star Wars",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg"
+    },
+    {
+        "question": "Who directed the movie 'The Silence of the Lambs'?",
+        "options": ["Jonathan Demme", "David Fincher", "Alfred Hitchcock", "Stanley Kubrick"],
+        "answer": "Jonathan Demme",
+        "image_url": "https://upload.wikimedia.org/wikipedia/en/8/86/The_Silence_of_the_Lambs_poster.jpg"
+    }
+]

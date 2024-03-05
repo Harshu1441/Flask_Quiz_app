@@ -104,10 +104,12 @@ def quiz():
         
         # Check if the question includes an image URL
         image_url = question.get('image_url')
-        
 
+        video_url = question.get('video_url')
+
+        
         session['question_start_time'] = time.time()  # Store the start time
-        return render_template('quiz.html', question=question, image_url=image_url)
+        return render_template('quiz.html', question=question, image_url=image_url , video_url=video_url)
 
     elif request.method == 'POST':
         selected_answer = request.form.get('answer')
@@ -189,6 +191,32 @@ def dashboard():
     return render_template('dashboard.html', data=data)
 
 
+
+@app.route('/clear_data', methods=['POST'])
+def clear_data():
+    # Get the path to the users.db file inside the instance folder
+    db_path = os.path.join(app.instance_path, 'users.db')
+
+    # Connect to the database
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    # Delete all data from the 'score' and 'user' tables
+    tables = ['score', 'user']
+    for table_name in tables:
+        cursor.execute("DELETE FROM " + table_name)
+
+    # Commit the changes and close the connection
+    conn.commit()
+    conn.close()
+
+    # Redirect back to the admin dashboard
+    flash('All table data has been cleared', 'info')
+    return redirect(url_for('dashboard'))
+
+
+
+
 @app.route('/reset', methods=['GET'])
 def reset_quiz():
     session.pop('current_question', None)
@@ -205,6 +233,12 @@ def congrats():
 @app.route('/sorry')
 def sorry():
     return render_template('sorry.html')
+
+
+@app.after_request
+def after_request(response):
+    response.headers['X-Frame-Options'] = 'ALLOW-FROM https://www.youtube.com'
+    return response
 
 if __name__ == '__main__':
     app.run(debug=True)

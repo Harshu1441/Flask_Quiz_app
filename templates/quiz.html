@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
         .container {
@@ -19,6 +19,7 @@
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative; /* Ensure the container is positioned relatively */
         }
 
         h1 {
@@ -27,10 +28,11 @@
             color: #333;
         }
 
-        img {
+        img, iframe {
             max-width: 100%;
             height: auto;
             margin-bottom: 20px;
+            border-radius: 5px;
         }
 
         form {
@@ -80,16 +82,26 @@
             font-weight: bold;
             margin-bottom: 20px;
         }
+
+        /* Countdown timer styling */
+        #countdown {
+            position: absolute;
+            top: 20px; /* Adjust the top position as needed */
+            right: 20px; /* Adjust the right position as needed */
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Question</h1>
         <p>{{ question.question }}</p>
-        {% if question.image_url %}
-            <img src="{{ question.image_url }}" alt="Question Image">
-        {% endif %}
-        <form action="/quiz" method="POST">
+        <div id="media-container"></div> <!-- Container for the media -->
+        <form action="/quiz" method="POST" id="quizForm">
             {% for option in question.options %}
                 <input type="radio" id="{{ option }}" name="answer" value="{{ option }}">
                 <label class="option" for="{{ option }}">{{ option }}</label>
@@ -100,9 +112,52 @@
             <input type="hidden" name="answer" value="pass">
             <button type="submit">Pass</button>
         </form>
+        <div id="countdown">30</div> <!-- Countdown timer element -->
         {% if message %}
         <p class="message">{{ message }}</p>
         {% endif %}
     </div>
+
+    <script>
+        // JavaScript code to dynamically embed media
+        document.addEventListener("DOMContentLoaded", function() {
+            var mediaContainer = document.getElementById('media-container');
+            var videoUrl = "{{ question.video_url }}";
+            if (videoUrl && videoUrl.startsWith('https://www.youtube.com/watch?v=')) {
+                var videoId = videoUrl.split('=')[1];
+               
+                var iframe = document.createElement('iframe');
+                iframe.setAttribute('width', '560');
+                iframe.setAttribute('height', '370');
+                iframe.setAttribute('src', 'https://www.youtube.com/embed/' + videoId);
+                iframe.setAttribute('frameborder', '0');
+                iframe.setAttribute('allowfullscreen', '');
+                mediaContainer.appendChild(iframe);
+            } else {
+                var imageUrl = "{{ question.image_url }}";
+                if (imageUrl) {
+                    var img = document.createElement('img');
+                    img.setAttribute('src', imageUrl);
+                    img.setAttribute('alt', 'Question Image');
+                    mediaContainer.appendChild(img);
+                }
+            }
+        });
+
+        // Countdown timer
+        var countdown = 30;
+        var countdownElement = document.getElementById('countdown');
+
+        function updateCountdown() {
+            countdown--;
+            countdownElement.textContent = countdown;
+            if (countdown <= 0) {
+                clearInterval(timer);
+                document.getElementById('quizForm').submit(); // Automatically submit the form when the countdown ends
+            }
+        }
+
+        var timer = setInterval(updateCountdown, 1000);
+    </script>
 </body>
 </html>

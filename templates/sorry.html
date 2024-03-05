@@ -4,10 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sorry!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            margin-top: 0;
+            color: #333;
+            font-size: 2.5rem;
+        }
+        p {
+            margin-top: 20px;
+            color: #666;
+            font-size: 1.2rem;
+        }
+        .emoji {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .emoji img {
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        .button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Sorry!</h1>
-    <p>You did not qualify for the next round. Better luck next time!</p>
-    <!-- You can add more content or styling here -->
+    <div class="container">
+        <div class="emoji"><img src="data:image/png;base64,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" alt="Sad Emoji"></div>
+        <h1>Sorry!</h1>
+        <p>You did not qualify for the next round. Better luck next time!</p>
+        <a href="#" class="button">Go Back</a>
+    </div>
 </body>
 </html>

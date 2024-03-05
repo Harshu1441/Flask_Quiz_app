@@ -21,27 +21,20 @@ class User(db.Model):
 class Score(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    username = db.Column(db.String(100), nullable=False)
     correct_answers = db.Column(db.Integer, nullable=False, default=0)
     total_questions = db.Column(db.Integer, nullable=False, default=0)
     time_taken = db.Column(db.Float, nullable=False, default=0.0)
     date_completed = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    qualified = db.Column(db.String(3), nullable=False, default='no')  # Change to string
 
 # Load quiz data from JSON file
 with open('quiz_data.json', 'r') as f:
     quiz_data = json.load(f)
 
-# Define the Threshold model
-class Threshold(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    threshold_value = db.Column(db.Integer, nullable=False)
-
 # Create tables if they don't exist
 with app.app_context():
     db.create_all()
-    if not Threshold.query.first():
-        threshold = Threshold(threshold_value=8)  # Threshold for the first round
-        db.session.add(threshold)
-        db.session.commit()
 
 @app.route('/')
 def index():
@@ -92,8 +85,6 @@ def quiz():
             session['total_attempted_questions'] = 0
         if 'correct_answers' not in session:
             session['correct_answers'] = 0
-        if 'qualify_for_next_round' not in session:
-            session['qualify_for_next_round'] = False
 
         if session['total_attempted_questions'] >= 17:  # User already attempted 15 questions plus 2 buffer
             flash('You have completed the quiz', 'info')
@@ -113,6 +104,7 @@ def quiz():
         
         # Check if the question includes an image URL
         image_url = question.get('image_url')
+        
 
         session['question_start_time'] = time.time()  # Store the start time
         return render_template('quiz.html', question=question, image_url=image_url)
@@ -128,12 +120,12 @@ def quiz():
 
         # If no score for today or the latest score is from a different day, create a new score
         if not score or score.date_completed.date() != datetime.now().date():
-            score = Score(user_id=session['user_id'])
+            score = Score(user_id=session['user_id'], username=user.username)  # Pass the username
             db.session.add(score)
 
         # Update the score or initialize if None
         if score is None:
-            score = Score(user_id=session['user_id'])
+            score = Score(user_id=session['user_id'], username=user.username)  # Pass the username
         score.correct_answers = (score.correct_answers or 0) + 1 if selected_answer == correct_answer else (score.correct_answers or 0)
         score.total_questions = (score.total_questions or 0) + 1
         score.time_taken = (score.time_taken or 0.0) + time_taken
@@ -143,23 +135,59 @@ def quiz():
 
         session['total_attempted_questions'] += 1  # Increment total attempted questions
 
-        if session['total_attempted_questions'] <= 15:  # Check if it's within the first 15 questions
-            if selected_answer == correct_answer:
-                session['correct_answers'] += 1
+        if session['total_attempted_questions'] == 17:  # After all questions attempted
+            total_correct_answers = score.correct_answers  # Retrieve total correct answers from the database
 
-        elif session['total_attempted_questions'] == 17:  # After all questions attempted
-            total_correct_answers = user.scores[-1].correct_answers  # Retrieve total correct answers from the database
+            # Compare with the threshold for qualification
+            if total_correct_answers >= 8:  # Adjust the threshold as needed
+                score.qualified = 'yes'
+            else:
+                score.qualified = 'no'
 
-            # Compare with the threshold for the first round
-            if total_correct_answers >= 8:
-                session['qualify_for_next_round'] = True
+            db.session.commit()  # Commit the qualification status
 
-            if session['qualify_for_next_round']:
+            if score.qualified == 'yes':
                 return redirect(url_for('congrats'))
             else:
                 return redirect(url_for('sorry'))
 
         return redirect(url_for('quiz'))
+
+from flask import Flask, render_template
+import sqlite3
+import os
+
+@app.route('/admin')
+def dashboard():
+    # Get the path to the users.db file inside the instance folder
+    db_path = os.path.join(app.instance_path, 'users.db')
+
+    # Connect to the database
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    # Fetch the data for 'score' and 'user' tables only
+    tables = ['score', 'user']
+    data = {}
+
+    for table_name in tables:
+        # Fetch column names
+        cursor.execute("PRAGMA table_info(" + table_name + ")")
+        column_names = cursor.fetchall()
+        
+        # Fetch table data
+        cursor.execute("SELECT * FROM " + table_name)
+        table_data = cursor.fetchall()
+        
+        # Store data for the table
+        data[table_name] = {'columns': [col[1] for col in column_names], 'data': table_data}
+
+    # Close the connection
+    conn.close()
+
+    # Pass the data to the template for rendering
+    return render_template('dashboard.html', data=data)
+
 
 @app.route('/reset', methods=['GET'])
 def reset_quiz():

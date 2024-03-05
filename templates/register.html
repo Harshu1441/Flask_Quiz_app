@@ -4,24 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .container {
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.8); /* Background color for the content area */
+        padding: 20px;
+        border-radius: 15px; /* Increased border radius */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+    }
+    h1 {
+        margin-top: 0;
+        color: #333;
+    }
+    form {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    label {
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    input[type="text"],
+    input[type="password"],
+    button[type="submit"] { /* Changed input[type="submit"] to button[type="submit"] */
+        width: 100%;
+        padding: 12px; /* Increased padding */
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 10px; /* Increased border radius */
+        box-sizing: border-box;
+    }
+    button[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    button[type="submit"]:hover { /* Added hover effect */
+        background-color: #0056b3;
+    }
+    p {
+        margin-top: 20px;
+    }
+    p a {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    p a:hover {
+        text-decoration: underline;
+    }
+    .error {
+        color: red;
+        margin-top: 10px;
+    }
+</style>
+
 </head>
 <body>
-    <h1>Register</h1>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-    <form action="{{ url_for('register') }}" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br>
-        <button type="submit">Register</button>
-    </form>
+    <div class="container">
+        <h1>Register</h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li class="error">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <form action="{{ url_for('register') }}" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+            <button type="submit">Register</button> <!-- Changed input type to button -->
+        </form>
+    </div>
 </body>
 </html>

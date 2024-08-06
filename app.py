@@ -86,7 +86,7 @@ def quiz():
         if 'correct_answers' not in session:
             session['correct_answers'] = 0
 
-        if session['total_attempted_questions'] >= 17:  # User already attempted 15 questions plus 2 buffer
+        if session['total_attempted_questions'] >= 60:  # User already attempted 15 questions plus 2 buffer
             flash('You have completed the quiz', 'info')
             return redirect(url_for('index'))
 
@@ -137,11 +137,11 @@ def quiz():
 
         session['total_attempted_questions'] += 1  # Increment total attempted questions
 
-        if session['total_attempted_questions'] == 17:  # After all questions attempted
+        if session['total_attempted_questions'] == 60:  # After all questions attempted
             total_correct_answers = score.correct_answers  # Retrieve total correct answers from the database
 
             # Compare with the threshold for qualification
-            if total_correct_answers >= 8:  # Adjust the threshold as needed
+            if total_correct_answers >= 50:  # Adjust the threshold as needed
                 score.qualified = 'yes'
             else:
                 score.qualified = 'no'
